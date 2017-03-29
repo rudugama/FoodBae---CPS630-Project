@@ -32,7 +32,7 @@
     </head>
 
     <body class="container">
-
+		
         <!--Nav Bar-->
         <nav class="navbar navbar-default navbar-fixed-top container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +49,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Vender Login</a></li>
+                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span>Vendor Login</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="input-group">
@@ -97,7 +97,7 @@
                 <div class="panel panel-default">
                     <h3 class="panel-heading panel-title text-center">NEARBY DEALS</h3>
                     <!-- Default panel contents -->
-                    <div class="panel-heading panel-info">Today's Deal is
+                    <div class="panel-heading panel-info">
                         <h4 class="text-center">Resutrant Name</h4>
                         <div class="panel-body">
                             <!-- List group -->
@@ -112,6 +112,58 @@
             <!--End Side-->
         
         </div>
+        
+<!-------------------------------------------------------------------------------------------------------------START PHPSCRIPT---------------------------------------------------------------------------------------------------------------------------->
+	<?php
+	$servername = "localhost";
+	$username = "rudugama";
+	$password = "Stingray#3";
+	$dbname = "foodbaee";
+
+	//create connection
+	$con = new mysqli($servername, $username, $password, $dbname);
+
+	//check connection
+	if ($con->connect_error){ 
+	die ("connection failed: " . $con -> connect_error); }
+
+	$sql = "SELECT * FROM `deals`";
+
+	$result = $con ->query($sql);
+
+	if ($result-> num_rows){
+		
+		while($row = $result -> fetch_assoc())
+		{
+	    		extract($row);
+	    		$fetch_array[] = $row;
+		}
+		
+	echo "<pre>";
+	print_r($fetch_array);
+	echo "</pre>";	
+	
+	foreach($fetch_array as $field)
+	{
+	   foreach($field as $fiel => $val)
+	   echo "Field: " . $fiel . " -> Value: " . $val . "<br>";    
+	}
+	echo "Hello. Today is ". date("Y-m-d") . ". Today's deal is: ..." . $fetch_array[0]['deal_name'];
+
+	}else{
+	echo"0 results";
+	}
+
+	//close connection
+	$con -> close();
+	?>
+<!--------------------------------------------------------------------------------------------------------------FINISH PHPSCRIPT-------------------------------------------------------------------------------------------------------------------------->	
+
+        
+        
+        
+        
+        
             <div class="container">
 
             <hr>
@@ -129,6 +181,9 @@
         <!-- /.container -->
         <script src="js/scripts.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTwGeuImGWUoz8UApDG0afCYt89UQfB9Q&callback=initMap"></script>
+        
+ 	       
+        
     </body>
 
 </html>

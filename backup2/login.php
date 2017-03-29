@@ -1,4 +1,6 @@
 <!doctype html>
+
+
 <html lang="en">
 
     <head>
@@ -14,6 +16,7 @@
         <meta name="author" content="Food, Daily Deals">
 
         <link rel="stylesheet" href="css/mycss.css">
+        <link rel="stylesheet" href="login.css">
         <!--[if lt IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 <![endif]-->
@@ -49,7 +52,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Vender Login</a></li>
+                    <li><a href="login/login.php"><span class="glyphicon glyphicon-user"></span> Vender Login</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="input-group">
@@ -65,70 +68,46 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-        <!--LOGIN MODAL Gonna disable this feature for now
-        
-            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="loginmodal-container">
-                        <h1>Vender Account</h1><br>
-<form id="login_form" method = "POST" action = 'bae.php'>
-                        <input type="text" id = 'asd' name="user" placeholder="Username">
-                        <input type="password" name="pass" placeholder="Password">
-                        <input type="submit" id = 'submit' value="Login">
-</form>
-                        <div class="login-help text-center">
-                            <a href="registration/form.php">Register</a> - <a href="#">Forgot Password</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         -->
+
         <!--End Nav Bar-->
         <div class="row container">
 
             <!--Map Side-->
-            <section class="col-md-8">
-                <div class="panel panel-default" id="map">
-                </div>
-            </section>
-            <!--End of Map-->
-            <!--Side-->
-            <section class="col-md-4">
-                <div class="panel panel-default">
-                    <h3 class="panel-heading panel-title text-center">NEARBY DEALS</h3>
-                    <!-- Default panel contents -->
-                    <div class="panel-heading panel-info">Today's Deal is
-                        <h4 class="text-center">Resutrant Name</h4>
-                        <div class="panel-body">
-                            <!-- List group -->
-                            <ul class="list-group">
-                                <li class="list-group-item">ITS LIT BRO</li>
-                                <li class="list-group-item">NUGGETS HERE</li>
-                            </ul>
+            <section class="col-md-12">
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-md-offset-4">
+                            <h1 class="text-center login-title">Sign in to the Vendor Hub</h1>
+                            <div class="account-wall">
+                                <img class="profile-img" src="https://68.media.tumblr.com/7e152caeef76f51b8e1921e8b2438012/tumblr_nwfs7sY5lj1twrdf3o1_1280.jpg"
+                                     alt="">
+                                <form class="form-signin">
+                                    <input type="text" class="form-control" placeholder="Username" required autofocus>
+                                    <input type="password" class="form-control" placeholder="Password" required>
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                        Sign in</button>
+                                 
+                                </form>
+                            </div>
+                            <a href="register.php" class="text-center new-account">Create an account</a>
                         </div>
                     </div>
                 </div>
+
+
+
+
             </section>
             <!--End Side-->
-        
         </div>
-            <div class="container">
-
-            <hr>
-
-                <!-- Footer -->
-                <footer>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p>Copyright &copy; FoodBAE 2017</p>
-                        </div>
-                    </div>
-                </footer>
-
-        </div>
-        <!-- /.container -->
         <script src="js/scripts.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTwGeuImGWUoz8UApDG0afCYt89UQfB9Q&callback=initMap"></script>
     </body>
 
 </html>
+
+
+<!-- This page uses sources from http://bootsnipp.com/snippets/featured/google-style-login -->

@@ -32,7 +32,7 @@
     </head>
 
     <body class="container">
-
+		
         <!--Nav Bar-->
         <nav class="navbar navbar-default navbar-fixed-top container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -84,6 +84,53 @@
             </div>
          -->
         <!--End Nav Bar-->
+
+        
+<!-------------------------------------------------------------------------------------------------------------START PHPSCRIPT---------------------------------------------------------------------------------------------------------------------------->
+	<?php
+	$servername = "localhost";
+	$username = "rudugama";
+	$password = "Stingray#3";
+	$dbname = "foodbaee";
+
+	//create connection
+	$con = new mysqli($servername, $username, $password, $dbname);
+
+	//check connection
+	if ($con->connect_error){ 
+	die ("connection failed: " . $con -> connect_error); }
+
+	$sql = "SELECT place_name, deal_name FROM `tuesday` GROUP BY place_name";
+	$lor = "SELECT DISTINCT place_name FROM `tuesday`";
+	
+	$result = $con ->query($sql);
+	
+	$rowcount=mysqli_num_rows($result);				
+	
+	//check if there are no empty rows
+	if ($result-> num_rows){
+		
+	//fetch loop for all elements from table into an array
+	while($row = $result -> fetch_assoc())
+	{
+		extract($row);
+	    	$fetch_array[] = $row;
+	}
+	
+	for ($i = 0; $i < $rowcount; $i++)
+	{
+	   
+	   echo "Deal: " . $fetch_array[$i]['deal_name'] . " -> Price: " . $fetch_array[$i]['price'] . "<br>";    
+	}
+	}else{
+	echo"0 results";
+	}
+	
+	//close connection
+	$con -> close();
+	?>
+<!------------------------------------------------------FINISH PHPSCRIPT-------------------------------------------->	
+
         <div class="row container">
 
             <!--Map Side-->
@@ -97,21 +144,30 @@
                 <div class="panel panel-default">
                     <h3 class="panel-heading panel-title text-center">NEARBY DEALS</h3>
                     <!-- Default panel contents -->
-                    <div class="panel-heading panel-info">Today's Deal is
+                    <div class="panel-heading panel-info">
                         <h4 class="text-center">Resutrant Name</h4>
                         <div class="panel-body">
                             <!-- List group -->
                             <ul class="list-group">
-                                <li class="list-group-item">ITS LIT BRO</li>
-                                <li class="list-group-item">NUGGETS HERE</li>
+                            <?php
+                            	foreach($fetch_array as $field){
+                            	echo "<li class=\"list-group-item\">" . $field['place_name'] . "</li>"; }                         		 
+                            ?>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
             <!--End Side-->
+            
+         
         
         </div>
+        
+        
+        
+        
+        
             <div class="container">
 
             <hr>
@@ -129,6 +185,9 @@
         <!-- /.container -->
         <script src="js/scripts.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTwGeuImGWUoz8UApDG0afCYt89UQfB9Q&callback=initMap"></script>
+        
+ 	       
+        
     </body>
 
 </html>
