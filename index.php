@@ -116,9 +116,9 @@
 <!-------------------------------------------------------------------------------------------------------------START PHPSCRIPT---------------------------------------------------------------------------------------------------------------------------->
 	<?php
 	$servername = "localhost";
-	$username = "rudugama";
-	$password = "Stingray#3";
-	$dbname = "foodbaee";
+	$username = "root";
+	$password = "";
+	$dbname = "foodbae";
 
 	//create connection
 	$con = new mysqli($servername, $username, $password, $dbname);

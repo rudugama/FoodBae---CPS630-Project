@@ -2,15 +2,15 @@
 include "loginAssistant.php";
 
 ?>
-<!doctype html>
-<html lang="en">
+    <!doctype html>
+    <html lang="en">
 
     <head>
         <!--HTML5 encoding -->
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="refresh" content="140">
 
-        <title>FoodBAE</title>
+        <title>FoodBAE: Login</title>
         <link rel="shortcut icon" href="#" />
         <!--mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@ include "loginAssistant.php";
         <meta name="author" content="Food, Daily Deals">
 
         <link rel="stylesheet" href="css/mycss.css">
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="css/login.css">
         <!--[if lt IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 <![endif]-->
@@ -54,7 +54,7 @@ include "loginAssistant.php";
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Vendor Login</a></li>
+                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span>Vendor Login</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="input-group">
@@ -82,18 +82,21 @@ include "loginAssistant.php";
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-md-offset-4">
-						
-							<div class="alert alert-success"> <?= $_SESSION['message'] ?></div>
+
+
                             <h1 class="text-center login-title">Login to Vendor Hub</h1>
+                            <div class="text-center alert">
+                                <?= $_SESSION['message'] ?>
+                            </div>
+
                             <div class="account-wall">
-                                <img class="profile-img" src="https://68.media.tumblr.com/7e152caeef76f51b8e1921e8b2438012/tumblr_nwfs7sY5lj1twrdf3o1_1280.jpg"
-                                     alt="">
-                                <form class="form-signin" action="login.php" method="post" enctype="multipart/form-data" autocomplete="off"/>
-                                    <input type="text" name="username" class="form-control" placeholder="Username" required autofocus/>
-                                    <input type="password" name="password" class="form-control" placeholder="Password" required/>
-                                    <input type="submit" value="LOGIN" name="register" class="btn btn-lg btn-primary btn-block"/>
-                                    
-                                 
+                                <img class="profile-img" src="https://68.media.tumblr.com/7e152caeef76f51b8e1921e8b2438012/tumblr_nwfs7sY5lj1twrdf3o1_1280.jpg" alt="">
+                                <form class="form-signin" action="login.php" method="post" enctype="multipart/form-data" autocomplete="off" />
+                                <input type="text" name="username" class="form-control" placeholder="Username" required autofocus/>
+                                <input type="password" name="password" class="form-control" placeholder="Password" required/>
+                                <input type="submit" value="LOGIN" name="register" class="btn btn-lg btn-primary btn-block" />
+
+
                                 </form>
                             </div>
                             <a href="register.php" class="text-center new-account">Create an account</a>
@@ -111,7 +114,7 @@ include "loginAssistant.php";
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTwGeuImGWUoz8UApDG0afCYt89UQfB9Q&callback=initMap"></script>
     </body>
 
-</html>
+    </html>
 
 
-<!-- This page uses sources from http://bootsnipp.com/snippets/featured/google-style-login -->
+    <!-- This page uses sources from http://bootsnipp.com/snippets/featured/google-style-login -->

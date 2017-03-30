@@ -3,7 +3,6 @@ include "database.php";
 session_start();
 $_SESSION['message'] = '';
 $_SESSION["logged_in"] = false;
-$_SESSION["username"] = $username;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 			// This query needs to make sure that both password and username is set
 	        //$query = "SELECT * FROM users WHERE username='$username'";
-	        $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+	        $query = "SELECT * FROM vendors WHERE username='$username' AND password='$password'";
             
             $result = mysqli_query($mysqli, $query);
             
