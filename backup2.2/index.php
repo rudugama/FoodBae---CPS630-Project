@@ -1,3 +1,4 @@
+<?echo "<br><br>";?>
 <!doctype html>
 <html lang="en">
 
@@ -100,9 +101,18 @@
 	if ($con->connect_error){ 
 	die ("connection failed: " . $con -> connect_error); }
 
-	$sql = "SELECT place_name, deal_name FROM `tuesday` GROUP BY place_name";
-	$lor = "SELECT DISTINCT place_name FROM `tuesday`";
-	
+	 $sql = "SELECT id,name,address,lat,lng, ( 6371 * acos( cos( radians(43.6542599) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(-79.3606359) ) + sin( radians(43.6542599) ) * sin( radians( lat ) ) ) ) AS distance FROM markers HAVING distance < 25 ORDER BY distance LIMIT 0 , 20";
+    date_default_timezone_set('America/Toronto');
+    $current_day = date(w);
+    $deal_res = $con->query($query = "SELECT `deal_name`,`price`
+                                        FROM deals
+                                       WHERE day = $current_day");
+
+    while($deal_obj = $deal_res->fetch_obj)
+    {
+        $deal_name[] = $deal_obj->deal_name;
+        $price[] = $deal_obj->price;
+    }                            	
 	$result = $con ->query($sql);
 	
 	$rowcount=mysqli_num_rows($result);				
@@ -145,22 +155,48 @@
                             <ul class="list-group">
                             <?php
                             	foreach($fetch_array as $field){
-                            	echo "<li class=\"list-group-item\">" . $field['place_name'] . "</li>"; }                         		 
-                            ?>
+                                   $lat = $field['lat'];
+                                   $lng = $field['lng'];
+                                   $name = $field['name'];
+                            	echo "<li class=\"list-group-item\" lat = $lat lng = $lng table_name = $name><a id = 'modal_id'  href=#> " . $field['name'] . "</a></li>";   
+                                }          ?>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
-            <!--End Side-->
-            
-         
-        
+            <!--End Side-->         
         </div>
-        
-        
-        
-        
+
+      <!-- Modal -->
+        <div class="modal fade" id="popup" role="dialog">
+            <div class="modal-dialog">
+           
+                <!-- Modal content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id = "desc"></h4> Restraunt
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                    <div class="row">
+                    <div class="col-md-8">Deal 1</div>
+                    <div class="col-md-4">Price</div>
+                    </div>    
+                    <div class="">Description</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default"><img src="img/navi.png" width="20"/></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+           
+            </div>
+       
+        </div>
+  
         
             <div class="container">
 

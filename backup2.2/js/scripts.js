@@ -52,6 +52,11 @@ function setMap(pos){
 
     console.log("Latitude: " + pos.lat +" Longitude:" +pos.lng);
     
+    $('.list-group li').hover(function(){
+       var markerNum = $(this).index();
+       google.maps.event.trigger(markers[markerNum],'click');
+       map.setCenter(new google.maps.LatLng($(this).attr('lat'),  $(this).attr('lng')));
+    });
     // //Drop Menu
     // locationSelect = document.getElementById("locationSelect");
     // locationSelect.onchange = function() {
@@ -112,6 +117,18 @@ function createOption(name, distance, num) {
     // locationSelect.appendChild(option);
 }
 
+// function searchLocations() {
+//      var address = document.getElementById("addressInput").value;
+//      var geocoder = new google.maps.Geocoder();
+//      geocoder.geocode({address: address}, function(results, status) {
+//        if (status == google.maps.GeocoderStatus.OK) {
+//         searchLocationsNear(results[0].geometry.location);
+//        } else {
+//          alert(address + ' not found');
+//        }
+//      });
+//    }
+
 function downloadUrl(url, callback) {
     var request = window.ActiveXObject ?
         new ActiveXObject('Microsoft.XMLHTTP') :
@@ -137,6 +154,13 @@ function parseXml(str) {
     return (new DOMParser).parseFromString(str, 'text/xml');
     }
 }
+
 function doNothing() {}
-
-
+$(document).ready(function(){
+    $('#popup').on('click',function(){
+        // data-toggle=\"modal\" data-target=\"#popup\"
+      $('#modal_header #desc').val($('.list-group li').attr('table_name')); 
+      $('.list-group li a').data('data-toggle','modal');
+      $('.list-group li a').data('data-target','popup');
+    });
+});
