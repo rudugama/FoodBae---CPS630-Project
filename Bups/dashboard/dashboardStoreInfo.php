@@ -1,5 +1,4 @@
-<?php session_start();if(!isset($_SESSION['username'])){   header("Location:../login.php");} ?>
-<!DOCTYPE html>
+<?php session_start();if(!isset($_SESSION['username'])){   header("Location:../login.php");} ?><!DOCTYPE html>
 <html lang="en">
     <head>
     <!--HTML5 encoding -->
@@ -27,84 +26,77 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-        <!--Load custom css-->
-        <link rel="stylesheet" href="../css/customCSS.css">
-
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+            #map {
+                height: 400px;
+            }
+        </style>
     </head>
-    <body >
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    <body  class="container" style="margin-top: 5%">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="dashboard.php"><img src="../img/FOODBAE.png" width="130"></a>
-            </div>
+                    </button>
+                    <a class="navbar-brand" href="dashboard.php">FoodBAE Dashboard</a>
+                </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">Contact Admin</a>
+                        <a href="#">Services</a>
                     </li>
-                    <li class="dropdown">
-                            <a href="" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
-                            <span class="caret"></span>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a>Logged in as
-                                            <?= $_SESSION['username'] ?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>Vendor ID#:
-                                            <?= $_SESSION['vendor_id'] ?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="account.php">Account</a>
-                                    </li>
-                                    <li>
-                                        <a href="logout.php">Log Out</a>
-                                    </li>
-                                </ul>
-                            </a>
-
-
-                        
+                    <li>
+                        <p class="navbar-text">Logged in as
+                            <?= $_SESSION['username'] ?>
+                        </p>
                     </li>
-                 
+                    <li>
+                        <p class="navbar-text">Vendor ID#:
+                            <?= $_SESSION['vendor_id'] ?>
+                        </p>
+                    </li>
+                    </li>
+                    <li>
+                        <p class="navbar-text"><a href="account.php">Account</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="navbar-text"> <a href="logout.php">Log Out</a></p>
+                    </li>
                 </ul>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+            </div>
+            <!-- /.container -->
+        </nav>
+
     <!-- Page Content -->
-    <div class="container pageContent">
+    <div class="container">
         <div class="row">
 
         <div class="col-md-3">
-                <div class="list-group">
-                    <h4 class="lead text-center">Welcome, <?= $_SESSION['username'] ?>! </h4>
-                    <a href="dashboard.php" class="list-group-item "> Dashboard<a>
-                    <a href="dashboardStoreInfo.php" class="list-group-item activeed"><span class="glyphicon glyphicon-pencil "></span> Store Info<a>
-                    <a href="dashboardDealInfo.php" class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> Deal Info<a>
-                    <a href="" class="list-group-item">Feedback (Coming Soon) </a>
-                    <a href="" class="list-group-item">Stats (Coming Soon)</a>
-                </div>
+            <p class="lead">Welcome, <?= $_SESSION['username'] ?>! </p>
+            <div class="list-group">
+                <a href="dashboardStoreInfo.php" class="list-group-item active"><span class="glyphicon glyphicon-pencil"></span> Store Info<a>                    
+                <a href="dashboardDealInfo.php" class="list-group-item "><span class="glyphicon glyphicon-pencil"></span> Deal Info<a>
+                <a href="" class="list-group-item">Feedback (Coming Soon) </a>
+                <a href="" class="list-group-item">Stats (Coming Soon)</a>
+            </div>
         </div>
 
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h1 class="text-center">Store Details</h1>
-                    <hr>
                     <form>
                         <!--Store Name-->
                         <div class="form-group ">
@@ -125,9 +117,7 @@
                             <label for="storeName">Place ID</label>
                             <input id="place-id"  class="form-control" type="text" placeholder="Place-id generated" readonly>
                         </div>
-                        <div class="text-center">
-                        <button type="submit" class="btn btn-success">Save Changes</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
                     
                     
@@ -139,7 +129,7 @@
     
     <!-- /.container -->
 
-    <div class="container text-center">
+    <div class="container">
 
         <hr>
 

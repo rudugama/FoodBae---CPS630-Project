@@ -1,3 +1,4 @@
+<?echo "<br><br>";?>
 <!doctype html>
 <html lang="en">
 
@@ -43,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Food&Beta;&Alpha;&Epsilon;</a>
+                <a class="navbar-brand" href="#">Food&Beta;&Alpha;&Epsilon;</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,13 +66,33 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
+        <!--LOGIN MODAL Gonna disable this feature for now
+        
+            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="loginmodal-container">
+                        <h1>Vender Account</h1><br>
+<form id="login_form" method = "POST" action = 'bae.php'>
+                        <input type="text" id = 'asd' name="user" placeholder="Username">
+                        <input type="password" name="pass" placeholder="Password">
+                        <input type="submit" id = 'submit' value="Login">
+</form>
+                        <div class="login-help text-center">
+                            <a href="registration/form.php">Register</a> - <a href="#">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         -->
+        <!--End Nav Bar-->
+
         
 <!-------------------------------------------------------------------------------------------------------------START PHPSCRIPT---------------------------------------------------------------------------------------------------------------------------->
 	<?php
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "foodbae";
+	$username = "rudugama";
+	$password = "Stingray#3";
+	$dbname = "foodbaee";
 
 	//create connection
 	$con = new mysqli($servername, $username, $password, $dbname);
@@ -80,10 +101,8 @@
 	if ($con->connect_error){ 
 	die ("connection failed: " . $con -> connect_error); }
 
-	$sql = "SELECT place_name, deal_name FROM `tuesday` GROUP BY place_name";
-	$lor = "SELECT DISTINCT place_name FROM `tuesday`";
-	
-	$result = $con ->query($sql);
+	 $sql = "SELECT id,vendor_id,name,address,lat,lng, ( 6371 * acos( cos( radians(43.6542599) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(-79.3606359) ) + sin( radians(43.6542599) ) * sin( radians( lat ) ) ) ) AS distance FROM markers HAVING distance < 25 ORDER BY distance LIMIT 0 , 20";
+    $result = $con ->query($sql);
 	
 	$rowcount=mysqli_num_rows($result);				
 	
@@ -100,8 +119,23 @@
 	}else{
 	echo"0 results";
 	}
-	
+    date_default_timezone_set('America/Toronto');
+    $current_day = date(w);
+    
+    $deal_res = $con->query($query = "SELECT `vendor_id`,`deal_name`,`price`
+                                        FROM `foodbaee`.`deals`
+                                       WHERE `day` = $current_day");
+    if($deal_res->num_rows)
+    {
+        while($deal_obj = $deal_res->fetch_object())
+        {
+           $deal_name[$deal_obj->vendor_id] = $deal_obj->deal_name;
+           $price[$deal_obj->vendor_id] = $deal_obj->price;
+        }
+    }
+
 	//close connection
+    
 	$con -> close();
 	?>
 <!------------------------------------------------------FINISH PHPSCRIPT-------------------------------------------->	
@@ -125,22 +159,48 @@
                             <ul class="list-group">
                             <?php
                             	foreach($fetch_array as $field){
-                            	echo "<li class=\"list-group-item\">" . $field['place_name'] . "</li>"; }                         		 
-                            ?>
+                                   $id = $field['vendor_id'];
+                                   $lat = $field['lat'];
+                                   $lng = $field['lng'];
+                                   $name = $field['name'];
+                                   $desc = $deal_name[$id];
+                                   $price1 = $price[$id];
+                                   echo "<li class=\"list-group-item\" lat = $lat lng = $lng ><a table_name = \"$name\" deal_desc = \"$desc\" price = \"$price1\" id = 'modal_id'  href=#\" data-toggle=\"modal\" data-target=\"#popup\"> " . $field['name'] . "</a></li>";   
+                                }          ?>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
-            <!--End Side-->
-            
-         
-        
+            <!--End Side-->         
         </div>
-        
-        
-        
-        
+
+      <!-- Modal -->
+        <div class = "modal fade" id="popup" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id = "desc"></h4> Restraunt
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                    <div class="row">
+                    <div class="col-md-8" id = 'deal_desc'></div>
+                    <div class="col-md-4" id = 'deal_price'></div>
+                    </div>    
+                  <!--  <div class="">Description</div>     Add this back whenver needed --> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default"><img src="img/navi.png" width="20"/></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div> 
+            </div>
+        </div>
+  
         
             <div class="container">
 

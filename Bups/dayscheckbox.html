@@ -1,0 +1,31 @@
+function select_day(para) 
+{ 
+if (document.getElementById('day1').checked) range=document.getElementById('day1').value; 
+if (document.getElementById('day2').checked) range=document.getElementById('day2').value; 
+if (document.getElementById('day3').checked) range=document.getElementById('day3').value; 
+if (document.getElementById('day4').checked) range=document.getElementById('day4').value; 
+if (document.getElementById('day5').checked) range=document.getElementById('day5').value; 
+if (document.getElementById('day6').checked) range=document.getElementById('day6').value; 
+if (document.getElementById('day7').checked) range=document.getElementById('day7').value; 
+initMap(); 
+} 
+
+
+<script>
+...
+<tr> 
+<td>Day:</td> 
+<td> 
+
+<input type="radio" id="day1" name="day" value="monday" checked onclick="select_day(this)"/>Monday
+<input type="radio" id="day2" name="day" value="tuesday" onclick="select_day(this)"/>Tuesday
+<input type="radio" id="day3" name="day" value="wednesday" onclick="select_day(this)"/>Wednesday
+<input type="radio" id="day4" name="day" value="thursday" onclick="select_day(this)"/>Thursday
+<input type="radio" id="day5" name="day" value="friday" onclick="select_day(this)"/>Friday
+<input type="radio" id="day6" name="day" value="saturday" onclick="select_day(this)"/>Saturday
+<input type="radio" id="day7" name="day" value="sunday" onclick="select_day(this)"/>Sunday
+
+</td> 
+</tr> 
+...
+</script>

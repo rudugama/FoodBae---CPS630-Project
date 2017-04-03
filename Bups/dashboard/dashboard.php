@@ -14,7 +14,7 @@
         <meta name="description" content="FoodBAE Homepage">
         <meta name="author" content="Food, Daily Deals">
 
-        
+        <!--<link rel="stylesheet" href="css/mycss.css">-->
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <![endif]-->
@@ -29,14 +29,11 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-        <!--Load custom css-->
-        <link rel="stylesheet" href="../css/customCSS.css">
 
     </head>
 
 
-<body>
+<body  class="container" style="margin-top: 5%">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -49,41 +46,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="dashboard.php"><img src="../img/FOODBAE.png" width="130"></a>
+                <a class="navbar-brand" href="dashboard.php">FoodBAE Dashboard</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">Contact Admin</a>
+                        <a href="#">Services</a>
                     </li>
-                    <li class="dropdown">
-                            <a href="" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
-                            <span class="caret"></span>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a>Logged in as
-                                            <?= $_SESSION['username'] ?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>Vendor ID#:
-                                            <?= $_SESSION['vendor_id'] ?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="account.php">Account</a>
-                                    </li>
-                                    <li>
-                                        <a href="logout.php">Log Out</a>
-                                    </li>
-                                </ul>
-                            </a>
-
-
-                        
+                    <li>
+                        <p class="navbar-text">Logged in as
+                            <?= $_SESSION['username'] ?>
+                        </p>
                     </li>
-                 
+                    <li>
+                        <p class="navbar-text">Vendor ID#:
+                            <?= $_SESSION['vendor_id'] ?>
+                        </p>
+                    </li>
+                    </li>
+                    <li>
+                        <p class="navbar-text"><a href="account.php">Account</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="navbar-text"> <a href="logout.php">Log Out</a></p>
+                    </li>
                 </ul>
                 </ul>
             </div>
@@ -93,14 +81,13 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container pageContent" >
-        
+    <div class="container">
+
         <div class="row">
 
             <div class="col-md-3">
+                <p class="lead">Welcome, <?= $_SESSION['username'] ?>! </p>
                 <div class="list-group">
-                    <h4 class="lead text-center">Welcome, <?= $_SESSION['username'] ?>! </h4>
-                    <a href="dashboard.php" class="list-group-item activeed"> Dashboard<a>
                     <a href="dashboardStoreInfo.php" class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> Store Info<a>
                     <a href="dashboardDealInfo.php" class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> Deal Info<a>
                     <a href="" class="list-group-item">Feedback (Coming Soon) </a>
@@ -113,24 +100,9 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h1 class="text-center">Current Resources</h1>
-                        <hr>
                         <div class="row">
-                            <a href="dashboardStoreInfo.php" class="col-md-3 text-center">
-                                 <h3><span class="glyphicon glyphicon-home "></span><br >
-                                 Store Info</h3>
-                            </a>
-                            <a href="dashboardDealInfo.php" class="col-md-3 text-center">
-                                 <h3><span class="glyphicon glyphicon-tag "></span><br >
-                                 Deal Info</h3>
-                            </a>
-                            <a href=""  class="col-md-3 text-center disabled" >
-                                 <h3><span class="glyphicon glyphicon-thumbs-up "></span><br >
-                                 Feedback </h3>
-                            </a>
-                            <a href=""  class="col-md-3 text-center disabled" >
-                                 <h3><span class="glyphicon glyphicon-stats "></span><br >
-                                 Stats</h3>
-                            </a>
+                        <iframe class="col-lg-12 col-md-12 col-sm-12" src="../database/select.php">
+                        </iframe>
                         </div>
                     </div>
                 </div>
@@ -143,7 +115,7 @@
     </div>
     <!-- /.container -->
 
-    <div class="container text-center">
+    <div class="container">
 
         <hr>
 
@@ -159,4 +131,7 @@
     </div>
     <!-- /.container -->
     </body>
+    <script type="text/javascript">
+        $('#timepicker1').timepicker();
+    </script>
 </html>

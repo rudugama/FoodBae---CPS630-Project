@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         {   
             $username = $_POST['username'];
 
-            $query = "SELECT * FROM users WHERE username='$username'";
+            $query = "SELECT * FROM vendors WHERE username='$username'";
             
             $result = mysqli_query($mysqli, $query);
             
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $_SESSION['username'] = $username;
 
                 //create SQL query string for inserting data into the database
-                $sql = "INSERT INTO users (username, email, password, isAdmin) "
+                $sql = "INSERT INTO vendors (username, email, password, isAdmin) "
                     . "VALUES ('$username', '$email', '$password', '$admin')";
                 
                 

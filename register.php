@@ -10,7 +10,7 @@ include "registration.php";
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="refresh" content="140">
 
-        <title>FoodBAE</title>
+        <title>FoodBAE: Vendor Registration</title>
         <link rel="shortcut icon" href="#" />
         <!--mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@ include "registration.php";
         <meta name="author" content="Food, Daily Deals">
 
         <link rel="stylesheet" href="css/mycss.css">
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="css/login.css">
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <![endif]-->
@@ -48,13 +48,13 @@ include "registration.php";
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Food&Beta;&Alpha;&Epsilon;</a>
+                <a class="navbar-brand" href="index.php">Food&Beta;&Alpha;&Epsilon;</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login/login.php"><span class="glyphicon glyphicon-user"></span>Vendor Login</a></li>
+                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span>Vendor Login</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="input-group">
@@ -83,7 +83,7 @@ include "registration.php";
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-md-offset-4">
                             <h1 class="text-center login-title">Vendor Registration</h1>
-                            <div class="alert alert-success"> <?= $_SESSION['message'] ?></div>
+                            <div class="alert"> <?= $_SESSION['message'] ?></div>
                             <div class="account-wall">
                                 <img class="profile-img" src="https://68.media.tumblr.com/7e152caeef76f51b8e1921e8b2438012/tumblr_nwfs7sY5lj1twrdf3o1_1280.jpg"
                                      alt="">

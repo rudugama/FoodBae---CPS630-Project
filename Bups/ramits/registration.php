@@ -2,54 +2,35 @@
 include "database.php";
 session_start();
 $_SESSION['message'] = '';
-$_SESSION["logged_in"] = false;
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //If the passwords equal to each other
-        $username = $mysqli->real_escape_string($_POST['username']);
-        $password = md5($_POST['password']); // md5 hashed password.. maybe use SHA52..
+    if ($_POST['password'] == $_POST['confirmpassword']){
 
+        $username = $mysqli->real_escape_string($_POST['username']);
+        $email = $mysqli->real_escape_string($_POST['email']);
+        $password = md5($_POST['password']); // md5 hashed password.. maybe use SHA52..
+        $admin = 0;
+        
+        //This below code checks if the username already exists!
         
         if(isset($_POST['username']))
         {   
-			$username = $_POST['username'];
-			
-			// This query needs to make sure that both password and username is set
-	        //$query = "SELECT * FROM users WHERE username='$username'";
-	        $query = "SELECT * FROM vendors WHERE username='$username' AND password='$password'";
+            $username = $_POST['username'];
+
+            $query = "SELECT * FROM users WHERE username='$username'";
             
             $result = mysqli_query($mysqli, $query);
             
             $numRow = mysqli_num_rows($result);
             
             if($numRow > 0){
-            //IF THE USER FOUND IN DB.. LOG THEM INTO DASHBOARD
-				// Figure out what session variables need to be sent over as well....
-                $sql = "SELECT * FROM vendors WHERE username='$username' AND password='$password'";
-                $result = mysqli_query($mysqli, $sql);
-                $venID ="";
-                while($row2 = mysqli_fetch_array($result)){
-                    
-                    $venID = $row2[0];
-                }
-                
-				$_SESSION['message'] = "Login Succesful";
-				$_SESSION["logged_in"] = true;
-				$_SESSION["username"] = $username;
-			    $_SESSION["vendor_id"] = $venID;
-				header("location: dashboard/dashboard.php");
-
-				 	
-			//$_SESSION['message'] = "$username is taken, please try again!";
+            $_SESSION['message'] = "$username is taken, please try again!";
             }
 
             else{
-				
-				
-				$_SESSION['message'] = "Login Failed, Try Again, or Create an Account";
-				
-				/*
                 //Inserting into database....
                 
                 $_SESSION['username'] = $username;
@@ -67,12 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 else{
                     $_SESSION['message'] = "$username could not be added to the database";
                 }
-				
-				*/
             }
 
 
         }
+
+    }else{
+        $_SESSION['message'] = "Passwords do not match, please re-enter.";
+    }
 }
 
 
